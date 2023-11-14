@@ -12,6 +12,12 @@ namespace GetPropertyData
 
     }
 
+    public class responses
+    {
+        public Customer customer { get; set; }  
+        public InspectionData inspectionData { get; set; }  
+    }
+
     // Root myDeserializedClass = JsonConvert.DeserializeObject<List<Root>>(myJsonResponse);
     public class Customer
     {

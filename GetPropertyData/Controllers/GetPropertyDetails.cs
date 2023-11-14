@@ -55,7 +55,8 @@ namespace GetPropertyData.Controllers
                 var inspectionData = JsonConvert.DeserializeObject<List<InspectionData>>(response.Content);
                 if (inspectionData != null)
                 {
-                    return Ok(inspectionData);
+                    responses responses = new responses() { customer = customer[0], inspectionData = inspectionData[0] };
+                    return Ok(responses);
                 }
                 else
                 {

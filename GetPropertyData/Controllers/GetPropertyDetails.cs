@@ -23,33 +23,21 @@ namespace GetPropertyData.Controllers
         {
 
 
-            //  CosmosDBHelper helper = new CosmosDBHelper(DBConnectionstr, "hackdatadb", "customerDetails");
-
-
-
-            //  helper.QueryItemsAsync<Customer>("SELECT * FROM c ").Wait();
-            // return Ok(helper.QueryItemsAsync<Customer>("SELECT * FROM c ").Result);
+           
 
             RequestDefinition requestDefinition = new RequestDefinition();
             requestDefinition.columnNames = new List<string>  { "First Name", "Last Name", "Date of Birth" };
             requestDefinition.columnValues = new List<string> { Fname, Sname, DOB };
-            //List<string[]> queryprams = new List<string[]>();
-            //queryprams.Add(new string[] { "First Name", "Last Name", "DOB" });
-            //queryprams.Add(new string[] { Fname, Sname, DOB });
+          
         
             var response = APIHelper.SendRequest(MultCustURL,RestSharp.Method.Get, null , requestDefinition);
-            //var response = APIHelper.GetAsync(CustomerURL, null, queryprams);
                        var customer = JsonConvert.DeserializeObject<List<Customer>>(response.Content);
             if (customer != null)
             {
                 RequestDefinition requestDefinition1 = new RequestDefinition();
                 requestDefinition1.columnNames = new List<string> { "Property Address" };
                 requestDefinition1.columnValues = new List<string> { customer[0].PropertyAddress };
-                //Dictionary<string, string> queryparams2 = new Dictionary<string, string>
-                //{
-                //    { "Property Address", customer[0].PropertyAddress }
-                //};
-                //var response2 = APIHelper.GetAsync(inspectiondataurl, queryparams2);
+               
                  response = APIHelper.SendRequest(inspectiondataurl, RestSharp.Method.Get, null, requestDefinition1);
 
                 var inspectionData = JsonConvert.DeserializeObject<List<InspectionData>>(response.Content);
